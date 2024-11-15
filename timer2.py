@@ -17,3 +17,5 @@ def input_timer(prompt, timeout=60):
             break
 
     return responses
+
+print("lol")

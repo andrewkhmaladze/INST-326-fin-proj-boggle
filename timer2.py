@@ -18,4 +18,4 @@ def input_timer(prompt, timeout=60):
 
     return responses
 
-print("lol")
+print("practice exam")

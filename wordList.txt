@@ -216,6 +216,7 @@ familiar
 principle
 another
 that
+based
 hold
 compass
 pitch
@@ -397,6 +398,7 @@ fine
 anchor
 joint
 heart
+hearts
 expression
 reach
 center
@@ -808,14 +810,17 @@ proceed
 walk
 restrain
 prince
+princes
 setting
 trick
+bats
 leader
 female
 universal
 floor
 fire
 false
+bases
 depression
 seal
 class
@@ -992,6 +997,7 @@ extremity
 gravity
 forth
 diameter
+bolts
 near
 scratch
 assembly
@@ -1212,12 +1218,14 @@ battery
 variation
 start
 price
+prices
 load
 necessity
 coming
 vehicle
 axis
 sweep
+rice
 wall
 sustain
 vote
@@ -1292,6 +1300,7 @@ successive
 stay
 painful
 lost
+coats
 advocate
 king
 motive
@@ -2278,6 +2287,7 @@ maturity
 infamous
 shorten
 else
+bag
 dexterous
 apparel
 mourning
@@ -2341,6 +2351,7 @@ abdomen
 silly
 monument
 song
+songs
 deduction
 submit
 inflame
@@ -3703,6 +3714,7 @@ apprehend
 fully
 gracious
 divert
+sir
 derived
 railroad
 interchange
@@ -3710,6 +3722,7 @@ originate
 obstinacy
 neuter
 sack
+sang
 capture
 fencing
 inquire
@@ -3817,6 +3830,7 @@ conference
 paid
 uneasiness
 instinct
+bat
 unworthy
 rival
 wasteful
@@ -4998,3 +5012,4 @@ aspirate
 intend
 potent
 enhance
+polls

@@ -43,3 +43,31 @@ This project is a completely functional Python Boggle game that relies on two pl
      - Both players total score is displayed.
      - A winner is determined from both scores!
 
+---
+
+## **Annotated Bibliography**
+1. Learning dfs functions(https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/)
+   (https://www.youtube.com/watch?v=Urx87-NMm6c)(https://www.youtube.com/watch?v=Sbciimd09h4):
+   - Taught me the foundations of Depth-First Search for a graph which was used for traversing 
+     the cells in all adjacent directions during word search.
+
+2. Timer(https://docs.python.org/3/library/time.html) 
+   (https://docs.python.org/3/library/time.html)
+   - Explained how to measure elapsed time and calculate the remaining time for the timer.
+   - Elaborated on the function and how it is used to capture user responses.
+
+3. Wordlist(https://github.com/benhoyt/boggle/blob/master/word-list.txt)
+   - Provided the perfect words list for a boggle game.
+
+---
+
+## **Attribution Table**
+
+| Method/Function       | Primary Author      | Techniques Demonstrated         |
+|-----------------------|---------------------|-------------------------------------|
+| `generate_grid`       | Aiin Khalilzadeh    | Comprehensions |
+| `load_dictionary`     | Andrew Khmaladze    | with statements |
+| `input_timer`         | Andrew Khmaladze    | Optional parameters  |
+| `searchwords`         | Aiin Khalilzadeh    | Set oprations    |
+| `Player.points`       | Maria Nedumthuruthil    | Conditional expressions          |
+| `result`              | Maria Nedumthuruthil   | f-strings  |

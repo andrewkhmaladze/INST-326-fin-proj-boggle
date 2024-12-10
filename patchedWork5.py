@@ -70,7 +70,8 @@ def input_timer(prompt, timeout):
     return responses
 
 def searchwords(board, dictionary):
-    """ looks for every word combination in grid that exists in words list
+    """ looks for every word combination in grid that exists in words dictionary 
+        text file
     
     Args: 
         board (str): boggle grid
@@ -96,7 +97,7 @@ def searchwords(board, dictionary):
         Args:
             x (int): x-coordinate of grid
             y (int): y-coordinate of grid
-            current_word (str): 
+            current_word (str): current word that's being searched in grid
             visited (stack): visited letters
         """
         # stop process if out of bounds/cell scanned 
@@ -139,7 +140,7 @@ class Player:
         self.name = name
         self.player_words = set(responses)
 
-    def points(self, dictionary, valid_words_from_grid):
+    def points(self, valid_words_from_grid):
         """
         Calculates the player's score based on the valid words guessed and length
 
@@ -147,20 +148,19 @@ class Player:
             Changes the self.player_words by removing all invalid words
         
         Args:
-            dictionary (set): Valid words from the dictionary in a set.
             valid_words_from_grid (set): All valid words found in a set
 
         Returns:
             int: The total score for the player.
         """
         points = 0
-        # store valid words in both dictionary/grid
-        valid_words = {
-            word for word in self.player_words if word in dictionary and word in valid_words_from_grid
+        # checks and stores player's responses that are in word directionary and grid
+        player_valid_words = {
+            word for word in self.player_words if word in valid_words_from_grid
         }
-        self.player_words = valid_words
+        self.player_words = player_valid_words
         # length-based scoring 
-        for word in valid_words:
+        for word in player_valid_words:
             if len(word) == 3 or len(word) == 4:
                 points += 1
             elif len(word) == 5:
@@ -173,46 +173,58 @@ class Player:
                 points += 11
         return points
 
-def result(player1, player2, dictionary, valid_words_from_grid):
+def result(player1, player2, valid_words_from_grid):
     """
-    Displays all valid words from the grid, the scores of each player, and announces the winner.
+    Displays each player's valid words from the grid, the scores of each player, and announces the winner.
 
     Side Effects: 
         Changes both player1.player_words and player2.player_words in order to remove shared guessed words.
+        Prints on messages about players scores on console
     
     Args:
         player1 (Player): The first player object.
         player2 (Player): The second player object.
-        dictionary (set): The set of valid words from the dictionary.
-        valid_words_from_grid (set): The set of valid words found in the grid.
-
-    Returns:
-        None
+        dictionary (list): The list of words from the dictionary text file.
+        valid_words_from_grid (set): The set of all possible valid words found in the grid.
     """
-    # Avoid duplication 
+    # removes shared since players don't get points for those
     shared_words = player1.player_words.intersection(player2.player_words)
     player1.player_words -= shared_words
     player2.player_words -= shared_words
     
-    p1_score = player1.points(dictionary, valid_words_from_grid)
-    p2_score = player2.points(dictionary, valid_words_from_grid)
+    p1_score = player1.points(valid_words_from_grid)
+    p2_score = player2.points(valid_words_from_grid)
 
-    print(f"{player1.name}'s total points: {p1_score}")
+    # Printing game outcome 
+    print(f"\nWords {player1.name} found: {player1.player_words}")
+    print(f"Words {player2.name} found: {player2.player_words}")
+    if len(shared_words) != 0:
+        print(f"Shared words removed: {shared_words}")
+        
+    print(f"\n{player1.name}'s total points: {p1_score}")
     print(f"{player2.name}'s total points: {p2_score}")
-    if p1_score > p2_score:
-        print(f"Congratulations {player1.name} is the winner!")
-    elif p2_score > p1_score:
-        print(f"Congratulations {player2.name} is the winner!")
-    else:
-        print("It's a tie!")
 
-def setup_game():
+    if p1_score > p2_score:
+        print(f"Congratulations {player1.name} is the winner!!")
+    elif p2_score > p1_score:
+        print(f"Congratulations {player2.name} is the winner!!")
+    else:
+        print("It's a tie!!")
+
+def setup_game(p1_name, p2_name):
     """
     Asks the user for a custom time for turn duration, and starts the game by confirming readiness
     from each player.
 
+    Args:
+        p1_name: Player 1's name
+        p2_name: Player 2's name
+    
     Side Effects:
         Reads all the inputs from user in the console.
+        
+    Raises:
+        ValueError: player didn't input integer value for time
 
     Returns:
         int: Turn time in seconds.
@@ -220,7 +232,7 @@ def setup_game():
     while True:
         try:
             # Query user on seconds per turn 
-            turn_time = int(input(" How many seconds do you want each turn to last? "))
+            turn_time = int(input("How many seconds do you want each turn to last? "))
             if turn_time <= 0:
                 print("Enter a positive number of seconds")
             else:
@@ -235,8 +247,8 @@ def setup_game():
     player2_ready = False
     # while loop until both are ready 
     while not (player1_ready and player2_ready):
-        player1_response = input("Player 1, type 'READY' when you are ready: ").strip()
-        player2_response = input("Player 2, type 'READY' when you are ready: ").strip()
+        player1_response = input(f"{p1_name}, type 'READY' when you are ready: ").strip()
+        player2_response = input(f"{p2_name}, type 'READY' when you are ready: ").strip()
 
         if player1_response.upper() == "READY":
             player1_ready = True
@@ -255,38 +267,41 @@ def main():
     """
     The main function to run the Boggle game. Sets the game up, gathers all the user inputs for timer and readiness, 
     generates the grid, calculates scores, and announces the winner.
-
+    
     Returns:
         None
     """
     # setup game 
-    turn_time = setup_game()
+    print("Welcome to Boggle!")
+    player1_name = input("Type Player 1's name: ").strip()
+    player2_name = input("Type Player 2's name: ").strip()
+    turn_time = setup_game(player1_name, player2_name)
+
+    # Load dictionary of valid words for game from text file
+    dictionary = load_dictionary("wordlist3.txt")
 
     # Generate and display grid
     grid = generate_grid()
     print("\nBoggle Grid:")
     print_grid(grid)
 
-    # Load dictionary of valid words
-    dictionary = load_dictionary("wordlist3.txt")
-
     # Player 1's turn
-    print("\nPlayer 1 turn:")
+    print(f"\n{player1_name}'s turn")
     player1_words = input_timer("Enter words one at a time:", timeout=turn_time)
 
     # Player 2's turn
-    print("\nPlayer 2 turn:")
+    print(f"\n{player2_name} turn:")
     player2_words = input_timer("Enter words one at a time:", timeout=turn_time)
 
-    # Call searchwords
+    # Call searchwords to find valid words for this round's grid
     valid_words = searchwords(grid, dictionary)
-    print("\nWords found in the grid:")
+    print("\nAll possible words found in the grid:")
     print(valid_words)
 
     # Create player objects + score 
-    player1 = Player("Player 1", player1_words)
-    player2 = Player("Player 2", player2_words)
-    result(player1, player2, dictionary, valid_words)
+    player1 = Player(player1_name, player1_words)
+    player2 = Player(player2_name, player2_words)
+    result(player1, player2, valid_words)
 
 if __name__ == "__main__":
     main()

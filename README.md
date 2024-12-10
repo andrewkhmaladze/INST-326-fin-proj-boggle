@@ -11,12 +11,12 @@ This project is a completely functional Python Boggle game that relies on two pl
 ---
 
 ## **Purpose of Each File**
-- **`patchedWork3.py`**: The main file connecting all of the following files to run the game. User inputs are included to set the timer and guess words.
+- **`patchedWork5.py`**: The main file connecting all of the following files to run the game. User inputs are included to set the timer and guess words.
 - **`grid.py`**: Generates a custom-made grid displaying random letters for players to guess.
 - **`scoring.py`**: Manages scoring for each player based on valid words guessed, and determines the winner at the end.
 - **`searchwords.py`**: Implements the logic to find valid words from the Boggle grid by navigating through each cell, allowing guesses in any adjacent direction. 
 - **`timer.py`**: Handles the timer system, which is user-selected, to track each player's turn until the game ends.
-- **`word-list.txt`**: A dictionary of all valid words used to verify player inputs.
+- **`wordlist3.txt`**: A dictionary of all valid words used to verify player inputs.
 
 ---
 

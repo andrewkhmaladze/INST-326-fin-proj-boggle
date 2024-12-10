@@ -30,8 +30,8 @@ This project is a completely functional Python Boggle game that relies on two pl
 ## **How to Use the Program Correctly**
 - Once the program is ran it will start with an introductory message "Welcome to Boggle!"
 - The 2 players then type in their names.
-- Then one players types in the number of seconds they want each turn to last.
 - Then both players must type "READY" (all uppercase) to start the official game.
+- Then one players types in the number of seconds they want each turn to last.
 - The grid is generated and Player 1 guesses words one at a time. The guesses must be:
      - Formed from adjacent cells in the grid
      - Valid words, otherwise it doesn't count towards the final score.

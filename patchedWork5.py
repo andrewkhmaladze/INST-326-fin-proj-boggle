@@ -147,6 +147,14 @@ class Player:
         self.name = name
         self.player_words = set(responses)
 
+    def get_set(self):
+        """" Serves to replace formal string representation of set() for attribute player_words speficially
+       
+        Returns:
+            str: either "None" the player_words empty or the formal representation of set() if not empty
+        """
+        return "None" if len(self.player_words) == 0 else self.player_words
+    
     def points(self, valid_words_from_grid):
         """
         Calculates the player's score based on the valid words guessed and length
@@ -203,8 +211,8 @@ def result(player1, player2, valid_words_from_grid):
     p2_score = player2.points(valid_words_from_grid)
 
     # Printing game outcome 
-    print(f"\nWords {player1.name} found: {player1.player_words}")
-    print(f"Words {player2.name} found: {player2.player_words}")
+    print(f"\nWords {player1.name} found: {player1.get_set()}")
+    print(f"Words {player2.name} found: {player2.get_set()}")
     if len(shared_words) != 0:
         print(f"Shared words removed: {shared_words}")
         
@@ -283,15 +291,15 @@ def main():
     player1_name = input("Type Player 1's name: ").strip()
     player2_name = input("Type Player 2's name: ").strip()
     turn_time = setup_game(player1_name, player2_name)
-
-    # Load dictionary of valid words for game from text file
-    dictionary = load_dictionary("wordlist3.txt")
-
+    
     # Generate and display grid
     grid = generate_grid()
     print("\nBoggle Grid:")
     print_grid(grid)
 
+    # Load dictionary of valid words for game from text file
+    dictionary = load_dictionary("wordlist3.txt")
+    
     # Player 1's turn
     print(f"\n{player1_name}'s turn")
     player1_words = input_timer("Enter words one at a time:", timeout=turn_time)

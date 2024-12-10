@@ -29,7 +29,7 @@ This project is a completely functional Python Boggle game that relies on two pl
    cd INST-326-fin-proj-boggle
 3. **Running the program:**
    ```bash
-   python patchedWork3.py
+   python patchedWork5.py
 
 ## **How to Use the Program Correctly**
 - Once the program is ran the player types in the seconds they want each turn to last

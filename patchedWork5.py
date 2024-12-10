@@ -42,31 +42,38 @@ def load_dictionary(filename="wordlist3.txt"):
 
 
 def input_timer(prompt, timeout):
-    """ runs timer during each player's turn
-    
+    """Runs timer during each player's turn.
+
     Args:
-        prompt (str): message for player when their turn starts
-        timeout (int): number of seconds for each round
-        
-    Returns:    
-        response (list): player's word responses    
-        
+        prompt (str): Message for player when their turn starts.
+        timeout (int): Number of seconds for each round.
+
+    Returns:
+        responses (list): Player's word responses.
+
     Side effects:
-        Prints prompt and time on console
+        Prints prompt and time on console.
     """
     print(prompt)
     start_time = time.time()
     responses = []
 
-    while time.time() - start_time <= timeout:
+    while True:
         remaining_time = timeout - (time.time() - start_time)
         if remaining_time <= 0:
+            print("no more time")
             break
-        print(f"Time left: {int(remaining_time)} seconds")
-        user_input = input()
-        responses.append(user_input.upper())
+        
+        print(f"remaining time = {int(remaining_time)} seconds")
 
-    print("Time's up")
+        #       check time left before allowing any action
+        user_input = input()
+        if timeout - (time.time() - start_time) > 0:  
+            responses.append(user_input.upper())
+        else:
+            print("no more time")
+            break
+
     return responses
 
 def searchwords(board, dictionary):

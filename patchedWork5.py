@@ -121,11 +121,38 @@ def searchwords(board, dictionary):
     return found_words
 
 class Player:
+    """
+    Represents a player for the Boggle game.
+
+    Attributes:
+        name (str): Name of the player
+        player_words (set): Guessed words by the player in a set.
+    """
     def __init__(self, name, responses):
+        """
+        Initializes a Player object with a name and their guessed words.
+
+        Args:
+            name (str): Player name.
+            responses (list): Guessed words by the player in a list.
+        """
         self.name = name
         self.player_words = set(responses)
 
     def points(self, dictionary, valid_words_from_grid):
+        """
+        Calculates the player's score based on the valid words guessed and length
+
+        Side Effects:
+            Changes the self.player_words by removing all invalid words
+        
+        Args:
+            dictionary (set): Valid words from the dictionary in a set.
+            valid_words_from_grid (set): All valid words found in a set
+
+        Returns:
+            int: The total score for the player.
+        """
         points = 0
         # store valid words in both dictionary/grid
         valid_words = {
@@ -147,6 +174,21 @@ class Player:
         return points
 
 def result(player1, player2, dictionary, valid_words_from_grid):
+    """
+    Displays all valid words from the grid, the scores of each player, and announces the winner.
+
+    Side Effects: 
+        Changes both player1.player_words and player2.player_words in order to remove shared guessed words.
+    
+    Args:
+        player1 (Player): The first player object.
+        player2 (Player): The second player object.
+        dictionary (set): The set of valid words from the dictionary.
+        valid_words_from_grid (set): The set of valid words found in the grid.
+
+    Returns:
+        None
+    """
     # Avoid duplication 
     shared_words = player1.player_words.intersection(player2.player_words)
     player1.player_words -= shared_words
@@ -165,6 +207,16 @@ def result(player1, player2, dictionary, valid_words_from_grid):
         print("It's a tie!")
 
 def setup_game():
+    """
+    Asks the user for a custom time for turn duration, and starts the game by confirming readiness
+    from each player.
+
+    Side Effects:
+        Reads all the inputs from user in the console.
+
+    Returns:
+        int: Turn time in seconds.
+    """
     while True:
         try:
             # Query user on seconds per turn 
@@ -200,6 +252,13 @@ def setup_game():
     return turn_time
 
 def main():
+    """
+    The main function to run the Boggle game. Sets the game up, gathers all the user inputs for timer and readiness, 
+    generates the grid, calculates scores, and announces the winner.
+
+    Returns:
+        None
+    """
     # setup game 
     turn_time = setup_game()
 

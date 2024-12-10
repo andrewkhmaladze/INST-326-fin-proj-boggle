@@ -2,25 +2,58 @@ import random
 import string
 import time
 
-# random letters grid
 def generate_grid(size=4):
+    """ Creates 4x4 boggle grid
+
+    Args: 
+        size (int): value for the dimensions of the grid; default 4
+        
+    Returns:    
+        grid (str): grid of random letters    
+    """
     letters = string.ascii_uppercase
     grid = [[random.choice(letters) for _ in range(size)] for _ in range(size)]
     return grid
 
-#  format grid
 def print_grid(grid):
+    """ Formats spaces in grid
+
+    Args:   
+        grid (str): randomized boggle grid 
+        
+    Side effects:
+        Prints grid on console
+    """ 
     for row in grid:
         print(' '.join(row))
 
-# open wordList.txt
 def load_dictionary(filename="wordlist3.txt"):
+    """opens word dictionary text file and stores words into list
+
+    Arg:    
+        filename (str): text file containing words for game
+    
+    Returns:
+        words (list): word dictionary of valid words that can be found 
+    """
     with open(filename, "r") as f:
         words = {line.strip().upper() for line in f}
     return words
 
-# turn function
+
 def input_timer(prompt, timeout):
+    """ runs timer during each player's turn
+    
+    Args:
+        prompt (str): message for player when their turn starts
+        timeout (int): number of seconds for each round
+        
+    Returns:    
+        response (list): player's word responses    
+        
+    Side effects:
+        Prints prompt and time on console
+    """
     print(prompt)
     start_time = time.time()
     responses = []
@@ -36,8 +69,16 @@ def input_timer(prompt, timeout):
     print("Time's up")
     return responses
 
-# function to match words from grid to wordslist 
 def searchwords(board, dictionary):
+    """ looks for every word combination in grid that exists in words list
+    
+    Args: 
+        board (str): boggle grid
+        dictionary (list): words list of possible words
+        
+    Returns:
+        found_words (set): all possible words that can be found with inputted grid     
+    """
     rows, cols = len(board), len(board[0])
 
     # create a set of prefixes from the dictionary
@@ -48,8 +89,16 @@ def searchwords(board, dictionary):
 
     found_words = set()
 
-    # helper function 
     def dfs(x, y, current_word, visited):
+        """ Depth-first search helper function used to make sure every letter path has been 
+            visited to make every word possible
+            
+        Args:
+            x (int): x-coordinate of grid
+            y (int): y-coordinate of grid
+            current_word (str): 
+            visited (stack): visited letters
+        """
         # stop process if out of bounds/cell scanned 
         if x < 0 or x >= rows or y < 0 or y >= cols or (x, y) in visited:
             return

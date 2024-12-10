@@ -11,11 +11,7 @@ This project is a completely functional Python Boggle game that relies on two pl
 ---
 
 ## **Purpose of Each File**
-- **`patchedWork5.py`**: The main file connecting all of the following files to run the game. User inputs are included to set the timer and guess words.
-- **`grid.py`**: Generates a custom-made grid displaying random letters for players to guess.
-- **`scoring.py`**: Manages scoring for each player based on valid words guessed, and determines the winner at the end.
-- **`searchwords.py`**: Implements the logic to find valid words from the Boggle grid by navigating through each cell, allowing guesses in any adjacent direction. 
-- **`timer.py`**: Handles the timer system, which is user-selected, to track each player's turn until the game ends.
+- **`patchedWork5.py`**: The main file containing all of the all the functions/methods to run the game. User inputs are included to set the timer and guess words.
 - **`wordlist3.txt`**: A dictionary of all valid words used to verify player inputs.
 
 ---
@@ -32,14 +28,20 @@ This project is a completely functional Python Boggle game that relies on two pl
    python patchedWork5.py
 
 ## **How to Use the Program Correctly**
-- Once the program is ran the player types in the seconds they want each turn to last
-- Then both players must type "READY" to start the official game.
-- The grid is generated and Player1 guesses words one at a time. The guesses must be:
+- Once the program is ran it will start with an introductory message "Welcome to Boggle!"
+- The 2 players then type in their names.
+- Then one players types in the number of seconds they want each turn to last.
+- Then both players must type "READY" (all uppercase) to start the official game.
+- The grid is generated and Player 1 guesses words one at a time. The guesses must be:
      - Formed from adjacent cells in the grid
      - Valid words, otherwise it doesn't count towards the final score.
-- Once the first turn timer runs out, Player2 repeats the last step
-- Once that timer runs the game is officially done:
-     - All Valid words available in the grid is displayed.
+             - Words at least 3 letters long
+             - Words existing in the loaded word directionary
+- Once the first player's timer runs out, Player 2 plays repeating the previous step
+- Once that second player's timer runs out, the game is officially done
+- The game's outcome will appear on the console in this order
+     - All Valid words available in the grid are displayed.
+     - Both players' guessed words and a set of their shared words (since they don't get points for guessing the same words)
      - Both players total score is displayed.
      - A winner is determined from both scores!
 
